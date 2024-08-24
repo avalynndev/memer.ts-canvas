@@ -1,8 +1,12 @@
 import { createCanvas, loadImage } from "canvas";
 
-export async function dab(avatar: string): Promise<Buffer> {
+export async function dab(
+	avatar: string,
+	isBuffer?: boolean
+): Promise<Buffer | string> {
 	if (!avatar)
 		return Promise.reject(new Error("You are missing the Avatar URL"));
+	const returnBuffer = isBuffer ?? true;
 
 	try {
 		const canvas = createCanvas(800, 611);
@@ -27,7 +31,8 @@ export async function dab(avatar: string): Promise<Buffer> {
 		ctx.drawImage(personImage, 300, 0, 500, 500);
 		ctx.drawImage(templateImage, 0, 0, 800, 611);
 
-		return canvas.toBuffer("image/png");
+		if (returnBuffer) return canvas.toBuffer("image/png");
+		else return canvas.toDataURL("image/png").split(",")[1];
 	} catch (error) {
 		return Promise.reject(
 			new Error(

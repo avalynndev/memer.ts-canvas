@@ -1,8 +1,12 @@
 import { createCanvas, loadImage } from "canvas";
 import { wrapText } from "../utils";
 
-export async function stonks(text: string): Promise<Buffer> {
+export async function stonks(
+	text: string,
+	isBuffer?: boolean
+): Promise<Buffer | string> {
 	if (!text) return Promise.reject(new Error("You are missing the Text"));
+	const returnBuffer = isBuffer ?? true;
 
 	if (text.length > 100)
 		return Promise.reject(
@@ -23,7 +27,8 @@ export async function stonks(text: string): Promise<Buffer> {
 
 		wrapText(ctx, text, 20, 50, maxWidth, lineHeight, maxHeight);
 
-		return canvas.toBuffer("image/png");
+		if (returnBuffer) return canvas.toBuffer("image/png");
+		else return canvas.toDataURL("image/png").split(",")[1];
 	} catch (error) {
 		return Promise.reject(
 			new Error(

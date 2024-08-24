@@ -1,8 +1,12 @@
 import { createCanvas, loadImage } from "canvas";
 
-export async function satan(avatar: string): Promise<Buffer> {
+export async function satan(
+	avatar: string,
+	isBuffer?: boolean
+): Promise<Buffer | string> {
 	if (!avatar)
 		return Promise.reject(new Error("You are missing the Avatar URL"));
+	const returnBuffer = isBuffer ?? true;
 
 	try {
 		const canvas = createCanvas(600, 450);
@@ -14,7 +18,7 @@ export async function satan(avatar: string): Promise<Buffer> {
 			),
 			fetch(encodeURI(avatar)),
 		]);
-		
+
 		const [templateBuffer, avatarBuffer] = await Promise.all([
 			template.arrayBuffer().then((buf) => Buffer.from(buf)),
 			avatarImage.arrayBuffer().then((buf) => Buffer.from(buf)),
@@ -28,7 +32,8 @@ export async function satan(avatar: string): Promise<Buffer> {
 		ctx.drawImage(templateImage, 0, 0, 600, 450);
 		ctx.drawImage(personImage, 200, 90, 195, 195);
 
-		return canvas.toBuffer("image/png");
+		if (returnBuffer) return canvas.toBuffer("image/png");
+		else return canvas.toDataURL("image/png").split(",")[1];
 	} catch (error) {
 		return Promise.reject(
 			new Error(
