@@ -1,0 +1,46 @@
+{
+	"name": "memer.ts-canvas",
+	"version": "0.0.2",
+	"description": "An Image Manipulation API With More than 50+ commands. ReWriten in typescript",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"build": "tsc"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/avalynndev/memer.ts-canvas.git"
+	},
+	"bugs": {
+		"url": "https://github.com/avalynndev/memer.ts-canvas/issues"
+	},
+	"author": "avalynndev",
+	"license": "GPL-3.0",
+	"dependencies": {
+		"canvas": "^2.11.2",
+		"fs": "^0.0.1-security",
+		"memer.ts-canvas": "^0.0.2"
+	},
+	"directories": {
+		"test": "tests"
+	},
+	"keywords": [
+		"memerapi",
+		"memer.ts",
+		"memer-api",
+		"memerapi.js",
+		"image-meme",
+		"memes",
+		"discord",
+		"discord.js-meme",
+		"image-memer",
+		"meme imgen",
+		"memer image manipulation"
+	],
+	"devDependencies": {
+		"@types/node": "^22.1.0",
+		"eslint": "^6.8.0",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.5.4"
+	}
+}
